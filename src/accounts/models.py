@@ -32,7 +32,7 @@ class CustomUser(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
 
     objects = MyUserManager()
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["name", "first_name"]
 
     def has_perm(self, perm, obj=None):
@@ -44,12 +44,3 @@ class CustomUser(AbstractBaseUser):
         "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
-
-"""
-class Users(models.Model):
-    name = models.CharField(max_length=70)
-    first_name = models.CharField(max_length=70)
-    email = models.EmailField(max_length=254,unique=True)
-    num_aero = models.IntegerField(default=0)
-    admin = models.BooleanField(default=False)
-    #avatar = models.ImageField()"""
