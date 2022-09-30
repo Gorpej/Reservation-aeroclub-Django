@@ -1,24 +1,25 @@
-from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.db import models
 
 
 # Create your models here.
 class MyUserManager(BaseUserManager):
-    def create_user(self, email, password=None):
+    def create_user(self, email, name, first_name, password=None):
         if not email:
             raise ValueError("Vous devez entrer un email")
-        user = self.model(email=self.normalize_email(email))
+        user = self.model(email=self.normalize_email(email),
+                          name=name,
+                          first_name=first_name)
         user.set_password(password)
         user.save()
         return user
 
-    def create_superuser(self, email, password=None):
-        user = self.create.user(email=email, password=password)
+    def create_superuser(self, email, name, first_name, password=None):
+        user = self.create_user(email=email, password=password, name=name, first_name=first_name)
         user.is_admin = True
         user.is_staff = True
         user.save()
         return user
-
 
 class CustomUser(AbstractBaseUser):
     name = models.CharField(max_length=70, blank=False)
@@ -32,7 +33,7 @@ class CustomUser(AbstractBaseUser):
 
     objects = MyUserManager()
     USERNAME_FIELD = 'email'
-    # REQUIRED_FIELDS = ["name", "first_name"]
+    REQUIRED_FIELDS = ["name", "first_name"]
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
