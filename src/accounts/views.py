@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from accounts.forms import UserRegistrationForm
@@ -13,3 +14,7 @@ def signup(request):
     else:
         form = UserRegistrationForm()
     return render(request, "accounts/signup.html", {"form": form})
+
+
+def profile(request):
+    return HttpResponse(f"Bienvenue {request.user.email}")
