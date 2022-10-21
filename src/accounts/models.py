@@ -26,7 +26,6 @@ class CustomUser(AbstractBaseUser):
     first_name = models.CharField(max_length=70, blank=False)
     avatar = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100, blank=True)
     email = models.EmailField(max_length=255, unique=True,blank =False)
-    num_aero = models.CharField(blank=True, max_length=5)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)

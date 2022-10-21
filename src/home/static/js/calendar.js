@@ -1,40 +1,27 @@
-document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
+(function () {
+	"use strict";
 
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    initialDate: '2022-08-07',
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
-    },
-    events: [
-      {
-        title: 'All Day Event',
-        start: '2022-08-01'
-      },
-      {
-        title: 'Long Event',
-        start: '2022-08-07',
-        end: '2022-08-10'
-      },
-      {
-        groupId: '999',
-        title: 'Repeating Event',
-        start: '2022-08-09T16:00:00'
-      },
-      {
-        groupId: '999',
-        title: 'Repeating Event',
-        start: '2022-08-16T16:00:00'
-      },
-      {
-        title: 'Conference',
-        start: '2022-08-11',
-        end: '2022-08-13'
-      },
-      {
-        title: 'Meeting',
-        start: '2022-08-12T10:30:00',
-        end: '2022-08-12T12:30:
+	var treeviewMenu = $('.app-menu');
+
+	// Toggle Sidebar
+	$('[data-toggle="sidebar"]').click(function(event) {
+		event.preventDefault();
+		$('.app').toggleClass('sidenav-toggled');
+	});
+
+	// Activate sidebar treeview toggle
+	$("[data-toggle='treeview']").click(function(event) {
+		event.preventDefault();
+		if(!$(this).parent().hasClass('is-expanded')) {
+			treeviewMenu.find("[data-toggle='treeview']").parent().removeClass('is-expanded');
+		}
+		$(this).parent().toggleClass('is-expanded');
+	});
+
+	// Set initial active toggle
+	$("[data-toggle='treeview.'].is-expanded").parent().toggleClass('is-expanded');
+
+	//Activate bootstrip tooltips
+	$("[data-toggle='tooltip']").tooltip();
+
+})();
